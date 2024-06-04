@@ -78,7 +78,7 @@ if (empty($order)) {
 
 ?>
 
-<?php if(empty($errors)): ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,6 +89,7 @@ if (empty($order)) {
     <title>Thanks for your order!</title>
 </head>
 <body>
+    <?php if(empty($errors)): ?>
     <!-- Remember that alternative syntax is good and html inside php is bad -->
     <div class="invoice">
         <h2>Thanks for your order <?= htmlspecialchars($name) ?>.</h2>
@@ -192,25 +193,26 @@ if (empty($order)) {
         </table>
 
     </div>
+
+
+    <?php
+    //Page to show errors when the form is not submitted
+        else :
+            // Display errors
+    ?>
+    <h2>Form could not be processed due to the following errors:</h2>
+
+    <ul>
+    <?php
+        foreach ($errors as $error) :
+    ?>
+    <li><?= $error ?></li>
+    <?php
+        endforeach;
+    ?>
+    </ul>
+    <?php
+        endif;
+    ?>
 </body>
 </html>
-
-<?php
-//Page to show errors when the form is not submitted
-    else :
-        // Display errors
-?>
-<h2>Form could not be processed due to the following errors:</h2>
-
-<ul>
-<?php
-    foreach ($errors as $error) :
-?>
-<li><?= $error ?></li>
-<?php
-        endforeach;
-?>
-</ul>
-<?php
-    endif;
-?>
