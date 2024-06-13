@@ -43,8 +43,9 @@ if (!validate_postal_code($postal_code)) $errors[] = "Postal code is invalid.";
 if (!$email) $errors[] = "Email is invalid.";
 if (!preg_match('/^\d{10}$/', $cc_number)) $errors[] = "Credit card number is invalid.";
 $current_month = date('m');
-if (!$cc_month || $cc_month < $current_month) $errors[] = "Credit card month is invalid.";
 $current_year = date('Y');
+// Validate credit card month and year
+if (!$cc_month || ($cc_year == $current_year && $cc_month < $current_month)) $errors[] = "Credit card month is invalid.";
 if (!$cc_year || $cc_year < $current_year || $cc_year > $current_year + 5) $errors[] = "Credit card year is invalid.";
 if (!$cc_name) $errors[] = "Name on card is required.";
 if ($cc_type !== 'on') $errors[] = "Credit card type is required.";
